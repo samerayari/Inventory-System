@@ -15,7 +15,7 @@ class UnitItem{
 }
 
 class OrderLine{
-  En linje i en ordre (vare og antal)
+  En linje i en ordre: vare og antal
 }
 
 class Order{
