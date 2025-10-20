@@ -38,8 +38,8 @@ class Customer{
 BulkItem --|> Item
 UnitItem --|> Item
 
-Order "1" --> "*" OrderLine : indeholder
-OrderLine "1" --> "1" Item : refererer til
+Order "1" --> "1" OrderLine : indeholder
+OrderLine "*" --> "1" Item : refererer til
 OrderBook "1" --> "*" Order : indeholder
 Customer "1" --> "1" OrderBook : opretter ordrer i
 Customer "1" --> "*" Order : har oprettet
