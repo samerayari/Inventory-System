@@ -1,31 +1,46 @@
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Collections.ObjectModel; 
 using System.Linq;
 
 namespace Afl6.Models
 {
     public class OrderBook
     {
+      
         public ObservableCollection<Order> QueuedOrders { get; } = new();
         public ObservableCollection<Order> ProcessedOrders { get; } = new();
+        public Inventory Inventory { get; } = new();
 
-        public Inventory Inventory { get; } = new(); 
-
+        
         public void QueueOrder(Order order)
         {
             QueuedOrders.Add(order);
         }
 
-        public void ProcessNextOrder()
+        // Behandler næste ordre og returnerer dens ordrelinjer
+        public List<OrderLine> ProcessNextOrder()
         {
-            if (QueuedOrders.Count == 0) return;
-            var next = QueuedOrders.First();
-            QueuedOrders.RemoveAt(0);
-            ProcessedOrders.Add(next);
+            if (QueuedOrders.Count == 0)
+                return new List<OrderLine>();
 
-           
-            Inventory.UpdateStockAfterOrder(next);
+            
+            var nextOrder = QueuedOrders[0];
+            QueuedOrders.RemoveAt(0); 
+            ProcessedOrders.Add(nextOrder); 
+
+            
+            Inventory.UpdateStockAfterOrder(nextOrder);
+
+         
+            return nextOrder.OrderLines;
         }
-
-        public double TotalRevenue() => ProcessedOrders.Sum(o => o.TotalPrice());
+        
+        public double TotalRevenue()
+        {
+            double total = 0;
+            foreach (var order in ProcessedOrders)
+                total += order.TotalPrice();
+            return total;
+        }
     }
 }

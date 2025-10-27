@@ -71,3 +71,4 @@
 /Users/samerayari/RiderProjects/Afl6/obj/Debug/net9.0/Afl6.pdb
 /Users/samerayari/RiderProjects/Afl6/obj/Debug/net9.0/Afl6.genruntimeconfig.cache
 /Users/samerayari/RiderProjects/Afl6/obj/Debug/net9.0/ref/Afl6.dll
+/Users/samerayari/RiderProjects/Afl6/obj/Debug/net9.0/Afl6.sourcelink.json
