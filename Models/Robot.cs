@@ -1,0 +1,28 @@
+using System.Net.Sockets;
+using System.Text;
+
+namespace Afl6.Models
+{
+    public class Robot
+    {
+        public const int UrsriptPort = 30002;
+        public const int DashboardPort = 29999;
+        public string IpAddress = "localhost";
+
+   
+        public void SendString(int port, string message)
+        {
+            using var client = new TcpClient(IpAddress, port);
+            using var stream = client.GetStream();
+            var bytes = Encoding.ASCII.GetBytes(message);
+            stream.Write(bytes, 0, bytes.Length);
+        }
+
+        
+        public void SendUrsript(string ursript)
+        {
+            SendString(DashboardPort, "brake release\n"); // "vågn op"
+            SendString(UrsriptPort, ursript);              // send script
+        }
+    }
+}
